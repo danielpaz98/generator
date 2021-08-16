@@ -1,0 +1,16 @@
+{
+	"name": "generator-dapaz",
+	"version": "1.0.0",
+	"description": "Dapaz Generator",
+	"files": [
+		"generators"
+	],
+	"keywords": [
+		"yeoman-generator"
+	],
+	"author": "danielpaz98",
+	"license": "ISC",
+	"dependencies": {
+		"yeoman-generator": "^4.1"
+	}
+}
