@@ -6,3 +6,8 @@
 
 - Install: `npm install -g yo generator-dapaz`
 - Run: `yo generator:subgenerator <name>` generates a subgenerator with the name `<name>`
+
+```
+yo dapaz:vue
+yo dapaz:react
+```
