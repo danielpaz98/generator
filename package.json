@@ -1,6 +1,6 @@
 {
 	"name": "generator-dapaz",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Dapaz Generator",
 	"files": [
 		"generators"
@@ -10,6 +10,10 @@
 	],
 	"author": "danielpaz98",
 	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/danielpaz98/generator.git"
+	},
 	"dependencies": {
 		"yeoman-generator": "^4.1"
 	}
