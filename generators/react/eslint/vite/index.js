@@ -29,7 +29,6 @@ module.exports = class extends Generator {
 				"eslint-plugin-promise",
 				"eslint-plugin-react",
 				"eslint-plugin-react-hooks",
-				"vite-react-jsx",
 				"vite-plugin-eslint",
 			],
 			{ "save-dev": true }
