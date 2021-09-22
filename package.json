@@ -1,6 +1,6 @@
 {
 	"name": "generator-dapaz",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Dapaz Generator",
 	"files": [
 		"generators"
