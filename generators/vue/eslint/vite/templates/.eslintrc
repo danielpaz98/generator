@@ -9,16 +9,21 @@
 		"standard",
 		"prettier"
 	],
+	"globals": {
+    "defineProps": "readonly",
+    "defineEmits": "readonly",
+    "defineExpose": "readonly",
+    "withDefaults": "readonly"
+  },
 	"rules": {
+		"no-unused-vars": "warn",
+		"no-dupe-keys": "warn",
+		"vue/no-unused-components": "warn",
+		"vue/no-setup-props-destructure": "warn",
+		"vue/return-in-computed-property": "warn",
+		"vue/require-prop-types": "off",
+		"array-callback-return": "off",
 		"vue/require-default-prop": "off",
-		"import/order": ["warn", {
-			"pathGroups": [{
-				"pattern": "~/**",
-				"group": "external",
-				"position": "after"
-			}],
-			"newlines-between": "always"
-		}],
 		"vue/attributes-order": ["warn", {
 			"order": [
 				"DEFINITION",

@@ -4,12 +4,7 @@
 		"es2021": true,
 		"node": true
 	},
-	"extends": [
-		"plugin:react/recommended",
-		"plugin:react-hooks/recommended",
-		"standard",
-		"prettier"
-	],
+	"extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "standard", "prettier"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true
@@ -18,26 +13,16 @@
 		"sourceType": "module"
 	},
 	"rules": {
+		"no-unused-vars": "warn",
+		"no-dupe-keys": "warn",
+		"array-callback-return": "warn",
 		"react/prop-types": "off",
 		"react/react-in-jsx-scope": "off",
 		"react/self-closing-comp": "warn",
-		"import/order": ["warn", {
-			"pathGroups": [{
-				"pattern": "~/**",
-				"group": "external",
-				"position": "after"
-			}],
-			"newlines-between": "always"
-		}],
+		"react/no-unknown-property": "warn",
 		"react/jsx-sort-props": [
 			"warn",
 			{ "callbacksLast": true, "shorthandFirst": true, "noSortAlphabetically": false, "reservedFirst": true }
-		],
-		"padding-line-between-statements": [
-			"error",
-			{ "blankLine": "always", "prev": "*", "next": "return" },
-			{ "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
-			{ "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] }
 		]
 	}
 }
