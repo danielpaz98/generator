@@ -1,23 +1,15 @@
-const Generator = require("yeoman-generator");
+const Generator = require("../../../../base");
 
 module.exports = class extends Generator {
-	viteConfig() {
+	initializing() {
+		this.addVsCodeSettings(this.templatePath(".vscode/settings.json"));
 		this.fs.copy(this.templatePath("vite.config.js"), this.destinationPath("vite.config.js"));
-	}
-
-	jsConfig() {
 		this.fs.copy(this.templatePath("jsconfig.json"), this.destinationPath("jsconfig.json"));
-	}
-
-	eslintIgnore() {
 		this.fs.copy(this.templatePath(".eslintignore"), this.destinationPath(".eslintignore"));
-	}
-
-	eslintRc() {
 		this.fs.copy(this.templatePath(".eslintrc"), this.destinationPath(".eslintrc"));
 	}
 
-	installDevDependencies() {
+	end() {
 		this.npmInstall(
 			[
 				"prettier",

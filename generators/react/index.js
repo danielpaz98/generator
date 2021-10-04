@@ -2,6 +2,11 @@ const Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
 	async prompting() {
+		const choicesList = [
+			// { name: "react" }, { name: "next" },
+			{ name: "vite" },
+		];
+
 		this.answers = await this.prompt([
 			{
 				type: "checkbox",
@@ -10,7 +15,6 @@ module.exports = class extends Generator {
 				choices: [
 					{
 						name: "eslint",
-						// message: "Coding styles and files config (eslint, editorconfig, etc)",
 						checked: true,
 					},
 					{
@@ -26,66 +30,38 @@ module.exports = class extends Generator {
 				name: "eslint",
 				message: "Which ESLint config do you want?",
 				when: (answers) => answers.features.includes("eslint"),
-				choices: [
-					{
-						name: "react",
-					},
-					{
-						name: "next",
-					},
-					{
-						name: "vite",
-					},
-				],
+				choices: choicesList,
 			},
 		]);
 	}
 
 	addFeatureEslint() {
 		if (this.answers.eslint) {
-			this.composeWith(require.resolve("./eslint/initial"));
+			this.composeWith(require.resolve("../editor-config"));
 
 			if (this.answers.eslint.includes("next")) {
-				this.composeWith(require.resolve("./eslint/next")).on("end", function () {
-					if (this.answers.features.includes("lint-staged")) {
-						this.composeWith(require.resolve("./lint-staged"));
-					}
-					if (this.answers.features.includes("snippets")) {
-						this.composeWith(require.resolve("./snippets"));
-					}
-				});
+				this.composeWith(require.resolve("./eslint/next"));
+			}
+
+			if (this.answers.eslint.includes("react")) {
+				this.composeWith(require.resolve("./eslint/react"));
 			}
 
 			if (this.answers.eslint.includes("vite")) {
-				this.composeWith(require.resolve("./eslint/vite")).on("end", function () {
-					if (this.answers.features.includes("lint-staged")) {
-						this.composeWith(require.resolve("./lint-staged"));
-					}
-					if (this.answers.features.includes("snippets")) {
-						this.composeWith(require.resolve("./snippets"));
-					}
-				});
+				this.composeWith(require.resolve("./eslint/vite"));
 			}
 		}
 	}
 
 	addFeatureLintStaged() {
-		if (!this.answers.eslint && this.answers.features.includes("lint-staged")) {
-			this.composeWith(require.resolve("./lint-staged")).on("end", function () {
-				if (this.answers.features.includes("snippets")) {
-					this.composeWith(require.resolve("./snippets"));
-				}
-			});
+		if (this.answers.features.includes("lint-staged")) {
+			this.composeWith(require.resolve("./lint-staged"));
 		}
 	}
 
-	addFeatureSnippets() {
-		if (
-			!this.answers.eslint &&
-			!this.answers.features.includes("lint-staged") &&
-			this.answers.features.includes("snippets")
-		) {
-			this.composeWith(require.resolve("./snippets"));
-		}
-	}
+	// addFeatureSnippets() {
+	// 	if (this.answers.features.includes("snippets")) {
+	// 		this.composeWith(require.resolve("./snippets"));
+	// 	}
+	// }
 };

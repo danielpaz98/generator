@@ -2,6 +2,11 @@ const Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
 	async prompting() {
+		const choicesList = [
+			// { name: "vue" }, { name: "nuxt" },
+			{ name: "vite" },
+		];
+
 		this.answers = await this.prompt([
 			{
 				type: "checkbox",
@@ -10,11 +15,13 @@ module.exports = class extends Generator {
 				choices: [
 					{
 						name: "eslint",
-						// message: "Coding styles and files config (eslint, editorconfig, etc)",
 						checked: true,
 					},
 					{
 						name: "lint-staged",
+					},
+					{
+						name: "postcss",
 					},
 					// {
 					// 	name: "snippets",
@@ -26,66 +33,61 @@ module.exports = class extends Generator {
 				name: "eslint",
 				message: "Which ESLint config do you want?",
 				when: (answers) => answers.features.includes("eslint"),
-				choices: [
-					{
-						name: "vue",
-					},
-					{
-						name: "nuxt",
-					},
-					{
-						name: "vite",
-					},
-				],
+				choices: choicesList,
+			},
+			{
+				type: "list",
+				name: "postcss",
+				message: "Which postcss config do you want?",
+				when: (answers) => answers.features.includes("postcss"),
+				choices: choicesList,
 			},
 		]);
 	}
 
 	addFeatureEslint() {
 		if (this.answers.eslint) {
-			this.composeWith(require.resolve("./eslint/initial"));
+			this.composeWith(require.resolve("../editor-config"));
 
 			if (this.answers.eslint.includes("nuxt")) {
-				this.composeWith(require.resolve("./eslint/nuxt")).on("end", function () {
-					if (this.answers.features.includes("lint-staged")) {
-						this.composeWith(require.resolve("./lint-staged"));
-					}
-					if (this.answers.features.includes("snippets")) {
-						this.composeWith(require.resolve("./snippets"));
-					}
-				});
+				this.composeWith(require.resolve("./eslint/nuxt"));
+			}
+
+			if (this.answers.eslint.includes("vue")) {
+				this.composeWith(require.resolve("./eslint/vue"));
 			}
 
 			if (this.answers.eslint.includes("vite")) {
-				this.composeWith(require.resolve("./eslint/vite")).on("end", function () {
-					if (this.answers.features.includes("lint-staged")) {
-						this.composeWith(require.resolve("./lint-staged"));
-					}
-					if (this.answers.features.includes("snippets")) {
-						this.composeWith(require.resolve("./snippets"));
-					}
-				});
+				this.composeWith(require.resolve("./eslint/vite"));
 			}
 		}
 	}
 
 	addFeatureLintStaged() {
-		if (!this.answers.eslint && this.answers.features.includes("lint-staged")) {
-			this.composeWith(require.resolve("./lint-staged")).on("end", function () {
-				if (this.answers.features.includes("snippets")) {
-					this.composeWith(require.resolve("./snippets"));
-				}
-			});
+		if (this.answers.features.includes("lint-staged")) {
+			this.composeWith(require.resolve("./lint-staged"));
 		}
 	}
 
-	addFeatureSnippets() {
-		if (
-			!this.answers.eslint &&
-			!this.answers.features.includes("lint-staged") &&
-			this.answers.features.includes("snippets")
-		) {
-			this.composeWith(require.resolve("./snippets"));
+	addFeaturePostCSS() {
+		if (this.answers.postcss) {
+			if (this.answers.postcss.includes("nuxt")) {
+				this.composeWith(require.resolve("./postcss/nuxt"));
+			}
+
+			if (this.answers.postcss.includes("vue")) {
+				this.composeWith(require.resolve("./postcss/vue"));
+			}
+
+			if (this.answers.postcss.includes("vite")) {
+				this.composeWith(require.resolve("./postcss/vite"));
+			}
 		}
 	}
+
+	// addFeatureSnippets() {
+	// 	if (this.answers.features.includes("snippets")) {
+	// 		this.composeWith(require.resolve("./snippets"));
+	// 	}
+	// }
 };
