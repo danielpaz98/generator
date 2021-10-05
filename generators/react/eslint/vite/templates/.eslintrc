@@ -13,6 +13,7 @@
 		"sourceType": "module"
 	},
 	"rules": {
+		"prefer-const": "warn",
 		"no-unused-vars": "warn",
 		"no-dupe-keys": "warn",
 		"array-callback-return": "warn",

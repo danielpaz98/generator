@@ -16,6 +16,7 @@
     "withDefaults": "readonly"
   },
 	"rules": {
+		"prefer-const": "warn",
 		"no-unused-vars": "warn",
 		"no-dupe-keys": "warn",
 		"vue/no-unused-components": "warn",
