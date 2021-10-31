@@ -1,17 +1,12 @@
 import path from "path";
 
 import { defineConfig } from "vite";
-import reactRefresh from "@vitejs/plugin-react-refresh";
+import react from "@vitejs/plugin-react";
 import eslintPlugin from "vite-plugin-eslint";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [reactRefresh(), eslintPlugin()],
-	esbuild: {
-		jsxFactory: "_jsx",
-		jsxFragment: "_jsxFragment",
-		jsxInject: `import { createElement as _jsx, Fragment as _jsxFragment } from 'react'`,
-	},
+	plugins: [react(), eslintPlugin()],
 	resolve: {
 		alias: {
 			"~": path.resolve(__dirname, "src"),
