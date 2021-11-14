@@ -8,7 +8,7 @@ module.exports = class extends Generator {
 				"pre-commit": "npx lint-staged",
 			},
 			"lint-staged": {
-				"src/**/*.{js,vue,json}": ["eslint --fix", "prettier --write"],
+				"src/**/*.{js,jsx,json}": ["eslint --fix", "prettier --write"],
 			},
 		};
 
