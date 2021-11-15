@@ -1,0 +1,44 @@
+{
+	"env": {
+		"browser": false,
+		"es2021": true,
+		"node": true
+	},
+	"extends": ["plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
+	"plugins": ["react", "import", "@typescript-eslint"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+	"rules": {
+		"prefer-const": "warn",
+		"no-unused-vars": "warn",
+		"no-dupe-keys": "warn",
+		"array-callback-return": "warn",
+		"react/prop-types": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/self-closing-comp": "warn",
+		"react/no-unknown-property": "warn",
+		"@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "args": "after-used",
+        "ignoreRestSiblings": false,
+        "argsIgnorePattern": "^_.*?$"
+      }
+    ],
+		"react/jsx-sort-props": [
+			"warn",
+			{ "callbacksLast": true, "shorthandFirst": true, "noSortAlphabetically": false, "reservedFirst": true }
+		]
+	}
+}
