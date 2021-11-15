@@ -11,4 +11,5 @@
 yo dapaz:editor-config
 yo dapaz:vue
 yo dapaz:react
+yo dapaz:react-ts
 ```
